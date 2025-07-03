@@ -31,8 +31,8 @@ def fix_protobuf_imports(root_dir, dry):
     root_dir = Path(root_dir)
 
     def generate_lookup(path: Path) -> Tuple[str, ProtobufFilePathInfo]:
-        name = path.name.split(".")[0]
         rel_path = path.relative_to(root_dir)
+        name = str(rel_path).split('.')[0].replace('/', '.')
         directory = path.parent.relative_to(root_dir)
 
         return (name, {"dir": directory, "path": path, "rel_path": rel_path})
